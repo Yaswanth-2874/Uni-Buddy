@@ -20,7 +20,7 @@ const studentSchema = new mongoose.Schema({
   avatar: {
     type: "String",
   },
-  Gender: {
+  gender: {
     type: "String",
     enum: ["male", "female"],
     required: "true",

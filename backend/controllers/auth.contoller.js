@@ -3,8 +3,22 @@ import Senpai from "../models/senpai.model.js";
 import bcrypt from "bcrypt";
 import generateTokenAndCreateCookie from "../utils/createCookie.js";
 
-export const login = (req, res) => {
-  res.json({ test: "working" });
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await Student.findOne({
+      email,
+    });
+    if (!user) return res.status(404).json({ error: "User does not exist" });
+    const passwordMatch = bcrypt.compare(password, user.password);
+    if (!passwordMatch)
+      return res.status(404).json({ error: "Invalid Credentials" });
+    generateTokenAndCreateCookie(user.userId, res);
+    return res.status(200).json({ user });
+  } catch (error) {
+    console.log("Error in login controller due to ", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
 };
 
 export const signup = async (req, res) => {
@@ -18,7 +32,7 @@ export const signup = async (req, res) => {
       gender,
       universityName,
     } = req.body;
-    const Model = role === "student" ? Student : Senpai;
+    const Model = Student;
 
     const user = await Model.findOne({ email });
     if (user)
@@ -51,6 +65,16 @@ export const signup = async (req, res) => {
     res.status(201).json({ newUser });
   } catch (error) {
     console.log("Error in signup controller due to ", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+export const logout = async (req, res) => {
+  try {
+    res.cookie("jwtToken", "", { maxAge: 0 });
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
+    console.log("Error in logout controller due to ", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
