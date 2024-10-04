@@ -177,7 +177,7 @@ function Hero() {
                </div>  
          </div>
          <div className='bg-[#262d34] w-[90%] h-80 rounded-2xl'>
-             
+             <div className='text-white text-center p-2 text-md font-bold font-sans'>Pinned Group  </div>
          </div>
          <div className='bg-[#262d34] flex flex-col text-center p-2 font-bold  text-white w-[90%] h-20 rounded-2xl'>
             <div className='text-center'>
