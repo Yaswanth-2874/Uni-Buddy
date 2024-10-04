@@ -52,6 +52,33 @@ function Hero() {
               <div className='bg-[#232a30] rounded-full text-white p-3 '>College Life</div>
               <div className='bg-[#232a30] rounded-full text-white p-3 '>Advice</div>
             </div>
+            {/* username */}
+            <div className='flex justify-between m-4 text-white'>
+              {/* profile */}
+              <div className='flex'>
+                    {/* img */}
+                    <div>
+                      <img src="" alt="img" />
+                    </div>
+                    {/* name and online status */}
+                    <div className='flex flex-col'>
+                      <div>Aniketh</div>
+                      <div>3 weeks ago</div>
+                    </div>
+              </div>
+              {/* views */}
+              <div>
+                 651,324 Views
+              </div>
+              {/* likes */}
+              <div>
+                  36,6545 Likes   
+              </div>
+              {/* comments */}
+              <div>
+                  56 comments
+              </div>
+            </div>
           </div>
           <div className='bg-[#262d34] w-5/6 h-52 rounded-xl'>
            
