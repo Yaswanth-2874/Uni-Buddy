@@ -35,7 +35,7 @@ function Hero() {
              
          </div>
        </div>
-        
+        {/* myname */}
         {/* middle */}
        <div className='flex flex-col w-[55%]  mt-1 gap-4 p-6'>
           {/*create post*/}
