@@ -10,7 +10,8 @@ export const login = async (req, res) => {
       email,
     });
     if (!user) return res.status(404).json({ error: "User does not exist" });
-    const passwordMatch = bcrypt.compare(password, user.password);
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    
     if (!passwordMatch)
       return res.status(404).json({ error: "Invalid Credentials" });
     generateTokenAndCreateCookie(user.userId, res);
