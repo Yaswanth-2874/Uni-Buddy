@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 
-const senpaiSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
   fullname: {
     type: "String",
     required: true,
   },
-  email: {
+  password: {
     type: "String",
     required: true,
   },
-  password: {
+  email: {
     type: "String",
     required: true,
   },
@@ -22,10 +22,15 @@ const senpaiSchema = mongoose.Schema({
   },
   gender: {
     type: "String",
-    required: true,
     enum: ["male", "female"],
+    required: true,
+  },
+  role: {
+    type: "String",
+    enum: ["Mentor", "Student"],
+    required: true,
   },
 });
 
-const Senpai = mongoose.model("senpai", senpaiSchema);
-export default Senpai;
+const User = new mongoose.model("user", userSchema);
+export default User;

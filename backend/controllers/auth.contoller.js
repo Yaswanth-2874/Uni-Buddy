@@ -1,5 +1,4 @@
-import Student from "../models/student.model.js";
-import Senpai from "../models/senpai.model.js";
+import Student from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import generateTokenAndCreateCookie from "../utils/createCookie.js";
 
@@ -14,7 +13,7 @@ export const login = async (req, res) => {
     
     if (!passwordMatch)
       return res.status(404).json({ error: "Invalid Credentials" });
-    generateTokenAndCreateCookie(user.userId, res);
+    generateTokenAndCreateCookie(user._id, res);
     return res.status(200).json({ user });
   } catch (error) {
     console.log("Error in login controller due to ", error);
@@ -33,9 +32,8 @@ export const signup = async (req, res) => {
       gender,
       universityName,
     } = req.body;
-    const Model = Student;
 
-    const user = await Model.findOne({ email });
+    const user = await User.findOne({ email });
     if (user)
       return res.status(404).json({ error: "Email already Registered" });
     if (password.length < 8)
@@ -50,7 +48,7 @@ export const signup = async (req, res) => {
     const girlProfilePic = `https://avatar.iran.liara.run/public/boy?username=${email}`;
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    const newUser = new Model({
+    const newUser = new User({
       fullname,
       password: hashedPassword,
       email,
