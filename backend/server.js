@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/api/auth", authRouter);
 app.use("/api/thread", threadRouter);
-app.use("/api/reply", messageRouter);
+app.use("/api/message", messageRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on Port ${PORT}`);
