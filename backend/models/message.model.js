@@ -5,7 +5,7 @@ const messageSchema = new mongoose.Schema(
     // Reference to the Author of the current Post
     authorId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Student",
+      ref: "Users",
       required: true,
     },
 
@@ -21,6 +21,14 @@ const messageSchema = new mongoose.Schema(
       required: true,
       default: 0,
     },
+
+    //For storing users who liked the message
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Users",
+      },
+    ],
 
     // For storing all the replies to the current Message
     replies: [
