@@ -1,6 +1,9 @@
+import express from "express";
 import Message from "../models/message.model.js";
 import Thread from "../models/thread.model.js";
 import User from "../models/user.model.js";
+
+const router = express.Router();
 
 export const createThread = async (req, res) => {
   try {
@@ -105,3 +108,15 @@ export const getAllThreads = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+export const getAlltags = async (req, res) => {
+  try {
+    const tags = await Thread.distinct("tags");
+    res.status(200).json({ tags });
+  } catch (error) {
+    console.log("Error in getTags Controller due to", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+export default router;
